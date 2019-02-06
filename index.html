@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Web Wallet</title>
+  <link rel="icon" type="image/png" href="img/web-wallet-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/switch-button.css">
+  <link rel="stylesheet" href="css/dark-theme.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+
+  <!-- toastr -->
+  <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
+</head>
+
+<body class="dark-theme">
+  <!-- Image and text -->
+  <nav class="navbar navbar-dark bg-dark" style="color:#ffffff;">
+    <a class="navbar-brand" href="#">
+      <img src="img/web-wallet-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      web-wallet
+    </a>
+    <div>
+      Address: <a href="#">0xabcd0123456789</a>
+    </div>
+    <div>
+      Balance: 2 STC
+    </div>
+    <div class="float-right">
+      <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
+        <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
+        <label class="onoffswitch-label" for="themeSwitcher"></label>
+      </div>
+      <div onclick="scanQR()" class="btn btn-outline-light">
+        Scan QR
+      </div>
+    </div>
+  </nav>
+
+  <br>
+
+  <div class="container">
+    <div id="qrscannerBox" class="card invisible">
+      <video id="preview"></video>
+    </div><br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send" aria-selected="true">
+                  Receive
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive" aria-selected="false">
+                  Send
+                </a>
+              </li>
+            </ul>
+                <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="send" role="tabpanel" aria-labelledby="send-tab">
+                <h5 class="card-title">My Wallet</h5>
+                <p class="card-text">
+                  <div>
+                    Address:
+                    <input id="addressBox" onclick="selectAndCopy(this)"
+                      readonly="readonly" type="text" placeholder="my address"
+                      class="form-control">
+                  </div>
+                  <div>
+                    Balance: 2 STC
+                  </div>
+                  <div id="qrcode"></div>
+                </p>
+              </div>
+              <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
+                <h5 class="card-title">New Tx</h5>
+                <p class="card-text">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Send to address">
+                    <br>
+                    <input type="number" class="form-control" placeholder="value" value="0">
+                  </div>
+                </p>
+                <div class="btn color_primary float-right">
+                  Send
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tx history</h5>
+            <p class="card-text">
+              <ul class="list-group" id="historyBox">
+                <!-- filled by js -->
+              </ul>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+
+
+
+<script type="text/javascript" src="lib/instascan.min.js"></script>
+<script type="text/javascript" src="lib/qrcode.min.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/toastr/build/toastr.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script>
+let theme = "dark-theme";
+function switchThemeClick() {
+  console.log(document.getElementById("themeSwitcher").checked);
+  if (document.getElementById("themeSwitcher").checked === true) {
+    theme = "dark-theme";
+  } else {
+    theme = "light";
+  }
+  console.log(theme);
+  document.body.className = theme;
+}
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+</script>
+
+<script src="js/utils.js"></script>
+<script src="js/index.js"></script>
+
+</body>
+
+</html>
