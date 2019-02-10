@@ -1,82 +1,95 @@
-const myAddr = '0xabcd0123456789';
+const RELAYURL = 'http://127.0.0.1:3000';
 
-function scanQR() {
-  document.getElementById('qrscannerBox').className = 'card';
-  // https://github.com/schmich/instascan
-  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-  scanner.addListener('scan', function (content) {
-    console.log('scanned!');
-    console.log(content);
-  });
-  Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-      scanner.start(cameras[0]);
-    } else {
-      console.error('No cameras found.');
-    }
-  }).catch(function (e) {
-    console.error(e);
-  });
+let myAddr = "";
+let myBalance = 0;
+console.log("l", localStorage.getItem("myAddr"));
+if (localStorage.getItem("myAddr")===null) {
+	myAddr = newRandKey();
+	/*
+	 How privK is stored in localStorage:
+	 [key] -> [value]
+	 'myAddr' -> addr
+	 addr -> e(privK)	encrypted by passphrase private key, at this moment is not encrypted
+	 */
+	localStorage.setItem("myAddr", myAddr);
+	toastr.success("New wallet created! Address: " + myAddr);
+}
+myAddr = localStorage.getItem("myAddr");
+console.log("myAddr", myAddr);
+
+function resetWallet() {
+	var r = confirm("Your private keys will be lost. Are you sure to reset your wallet?");
+	if (r == true) {
+	  toastr.info("Starting to reset the wallet");
+	  localStorage.clear();
+	  location.reload();
+	} else {
+	  toastr.info("Wallet reset canceled");
+	}
 }
 
-function generateHistoryElement(from, to, value, date) {
-  let html = '';
-  html += `
-  <li class="list-group-item">
-    <a href="#">`+from+`</a> --> <a href="#">`+to+`</a>
-    <div class="float-right">
-      <small>`+date+`</small>
-      <span class="badge color_primary">`+value+` STC</span>
-    </div>
-  </li>
-  `;
-  return html;
+function newRandKey() {
+    const w = ethWallet.generate();
+    const privK = w._privKey;
+    const address = ethUtil.privateToAddress(privK);
+    const addressHex = bytesToHex(address);
+    const privKHex = bytesToHex(privK);
+    localStorage.setItem(addressHex, privKHex);
+    return addressHex;
 }
 
-function printHistory(elems) {
-  let html = '';
-  for(let i=elems.length-1; i>=0; i--) {
-        html += generateHistoryElement(elems[i].from, elems[i].to, elems[i].value, elems[i].date);
-  }
-  document.getElementById('historyBox').innerHTML = html;
-}
+// show myAddr QR
+new QRCode(document.getElementById('qrcode'), myAddr);
+// show myAddr
+document.getElementById('myAddrBox').value=myAddr;
+
+// show current myAddr balance
+axios.get(RELAYURL + '/balance/' + myAddr, function(res) {
+	myBalance = res.balance;
+	document.getElementById('myBalanceBox').value=myBalance;
+});
 
 // fake data
 let fakeHistoryElems = [
   {
-    from: 'Ciutat invisible',
-    to: '0xabcd0123456789',
+    from: 'Shop 1',
+    to: myAddr,
     value: 10,
     date: '2019-01-18, 18.40h'
   },
   {
-    from: '0xabcd0123456789',
-    to: 'Kop de mà',
+    from: myAddr,
+    to: 'Shop 2',
     value: 2,
     date: '2019-01-18, 19.25h'
   },
   {
-    from: '0xabcd0123456789',
-    to: 'Lleialtat-Bar',
+    from: myAddr,
+    to: 'Shop2',
     value: 1.5,
     date: '2019-01-20, 19.25h'
   },
   {
-    from: '0xabcd0123456789',
-    to: 'Lleialtat-Bar',
+    from: myAddr,
+    to: 'Shop3',
     value: 1.5,
     date: '2019-01-20, 19.40h'
   },
   {
-    from: '0xabcd0123456789',
-    to: 'Can Batlló',
+    from: myAddr,
+    to: 'Shop1',
     value: 3,
     date: '2019-01-20, 21.35h'
   },
 ];
-
-
-new QRCode(document.getElementById('qrcode'), myAddr);
-document.getElementById('addressBox').value=myAddr;
-
 printHistory(fakeHistoryElems);
+
+
+/*
+TODO (for minimal version):
+- generate mnemonic
+- allow mnemonic backup
+- allow import mnemonic
+- create and sign transactions
+- scan QR with cam
+*/
