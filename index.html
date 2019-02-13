@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Web Wallet</title>
+  <title>kvartalo web wallet</title>
   <link rel="icon" type="image/png" href="img/web-wallet-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
@@ -21,7 +21,7 @@
   <nav class="navbar navbar-dark bg-dark" style="color:#ffffff;">
     <a class="navbar-brand" href="#">
       <img src="img/web-wallet-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      web-wallet
+      kvartalo web-wallet
     </a>
     <div class="float-right">
       <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
@@ -81,12 +81,12 @@
                 <h5 class="card-title">New Tx</h5>
                 <p class="card-text">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Send to address">
+                    <input id="toAddr" type="text" class="form-control" placeholder="Send to address" value="0xbc88fcc53af747D30F1e17729659001d1129ddd7">
                     <br>
-                    <input type="number" class="form-control" placeholder="value" value="0">
+                    <input id="amount" type="number" class="form-control" placeholder="value" value="0">
                   </div>
                 </p>
-                <div class="btn color_primary float-right">
+                <div onclick="transact()" class="btn color_primary float-right">
                   Send
                 </div>
               </div>
@@ -159,6 +159,7 @@ function switchThemeClick() {
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
 <script src="lib/ethereumjs-util-browserified.js"></script>
 <script src="lib/ethereumjs-wallet-browserified.js"></script>
 <script src="js/utils.js"></script>
