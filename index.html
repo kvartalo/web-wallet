@@ -41,7 +41,9 @@
       <video id="preview"></video>
     </div><br>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
         <div class="card">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
@@ -70,18 +72,24 @@
                   <div>
 			Balance:
 		      <span class="badge color_primary" style="font-size:medium;">
-			<span id="myBalanceBox">0</span> STC
+			<span id="myBalanceBox">0</span> KVT
 		      </span>
+		      <div onclick="getBalance()" class="btn btn-outline-light btn-sm float-right">
+			Refresh
+		      </div>
                   </div>
 		  <br><br>
                   <div id="qrcode"></div>
+		  <div id="spinnerBalance" class="spinner-border" role="status">
+		    <span class="sr-only">Loading...</span>
+		  </div>
                 </p>
               </div>
               <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
                 <h5 class="card-title">New Tx</h5>
                 <p class="card-text">
                   <div class="form-group">
-                    <input id="toAddr" type="text" class="form-control" placeholder="Send to address" value="0xbc88fcc53af747D30F1e17729659001d1129ddd7">
+                    <input id="toAddr" type="text" class="form-control" placeholder="Send to address">
                     <br>
                     <input id="amount" type="number" class="form-control" placeholder="value" value="0">
                   </div>
@@ -89,21 +97,11 @@
                 <div onclick="transact()" class="btn color_primary float-right">
                   Send
                 </div>
+		<div id="spinnerTx" class="spinner-border invisible" role="status">
+		  <span class="sr-only">Loading...</span>
+	      	</div>
               </div>
             </div>
-          </div>
-        </div>
-        <br>
-      </div>
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Tx history</h5>
-            <p class="card-text">
-              <ul class="list-group" id="historyBox">
-                <!-- filled by js -->
-              </ul>
-            </p>
           </div>
         </div>
         <br>
