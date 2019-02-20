@@ -28,6 +28,16 @@
         <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
         <label class="onoffswitch-label" for="themeSwitcher"></label>
       </div>
+      <div class="btn dropdown">
+	  <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Settings
+	  </a>
+
+	  <div class="dropdown-menu btn-outline-dark" aria-labelledby="dropdownMenuLink">
+	    <a class="dropdown-item btn-outline-dark" href="exportseed.html">Export seed</a>
+	    <a class="dropdown-item btn-outline-dark" href="importseed.html">Import seed</a>
+	  </div>
+      </div>
       <div onclick="scanQR()" class="btn btn-outline-light">
         Scan QR
       </div>
@@ -160,9 +170,12 @@ function switchThemeClick() {
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
 <script src="lib/ethereumjs-util-browserified.js"></script>
 <script src="lib/ethereumjs-wallet-browserified.js"></script>
+<script src="lib/bip39-browserified.js"></script>
+<script src="lib/hdkey-browserified.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/qr-utils.js"></script>
 <script src="js/render-utils.js"></script>
+<script src="js/wallet.js"></script>
 <script src="js/index.js"></script>
 
 </body>

@@ -20,5 +20,15 @@ browserify index.js --standalone ethUtil > ethereumjs-util-browserified.js
 
 - ethWallet
 ```
-browserify index.js --standalone ethWallet > ethereumjs-wallet--browserified.js
+browserify index.js --standalone ethWallet > ethereumjs-wallet-browserified.js
+```
+
+- bip39
+```
+browserify index.js --standalone bip39 > bip39-browserified.js
+```
+
+- hdkey
+```
+browserify hdkey.js --standalone hdkey > hdkey-browserified.js
 ```

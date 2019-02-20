@@ -4,8 +4,6 @@ const sha3 = b => web3.utils.soliditySha3(b)
 const uint256 = n => "0x"+n.toString(16).padStart(64,'0')
 const uint8 = n => "0x"+n.toString(16)
 
-
-
 const RELAYURL = 'http://127.0.0.1:3000';
 const TOKENADDR = '0x9BD08b875A9Bf7Fc6889390bE4704458cD695074';
 
@@ -13,41 +11,25 @@ let myAddr = "";
 let myBalance = 0;
 let myNonce = 0;
 
-console.log("l", localStorage.getItem("myAddr"));
+console.log("myAddr", localStorage.getItem("myAddr"));
+console.log("mySeed", localStorage.getItem("mySeed"));
 if (localStorage.getItem("myAddr")===null) {
-	myAddr = newRandKey();
+	// myAddr = newRandKey();
+	let obj = generateKeysMnemonic();
 	/*
 	 How privK is stored in localStorage:
 	 [key] -> [value]
 	 'myAddr' -> addr
 	 addr -> e(privK)	encrypted by passphrase private key, at this moment is not encrypted
 	 */
-	localStorage.setItem("myAddr", myAddr);
-	toastr.success("New wallet created! Address: " + myAddr);
+	localStorage.setItem("myAddr", obj.address);
+	localStorage.setItem("mySeed", obj.mnemonic);
+	console.log("seed", obj.mnemonic);
+	toastr.success("New wallet created! Address: " + obj.address);
 }
 myAddr = localStorage.getItem("myAddr");
 console.log("myAddr", myAddr);
 
-function resetWallet() {
-	var r = confirm("Your private keys will be lost. Are you sure to reset your wallet?");
-	if (r == true) {
-	  toastr.info("Starting to reset the wallet");
-	  localStorage.clear();
-	  location.reload();
-	} else {
-	  toastr.info("Wallet reset canceled");
-	}
-}
-
-function newRandKey() {
-    const w = ethWallet.generate();
-    const privK = w._privKey;
-    const address = ethUtil.privateToAddress(privK);
-    const addressHex = bytesToHex(address);
-    const privKHex = bytesToHex(privK);
-    localStorage.setItem(addressHex, privKHex);
-    return addressHex;
-}
 
 // show myAddr QR
 new QRCode(document.getElementById('qrcode'), myAddr);
@@ -137,8 +119,6 @@ getBalance();
 
 /*
 TODO (for minimal version):
-- generate mnemonic
-- allow mnemonic backup
-- allow import mnemonic
 - scan QR with cam
+- better UX flow
 */
