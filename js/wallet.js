@@ -11,7 +11,7 @@ function resetWallet() {
 
 function generateKeysMnemonic(mnemonic) {
 	if (mnemonic == undefined) {
-	mnemonic = bip39.generateMnemonic();
+		mnemonic = bip39.generateMnemonic();
 	}
 
 	const root = hdkey.fromMasterSeed(mnemonic);

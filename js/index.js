@@ -42,7 +42,7 @@ function getBalance() {
 	// show current myAddr balance
 	axios.get(RELAYURL + '/balance/' + myAddr)
 	  .then(function (res) {
-	    myBalance = res.data.balance;
+	    myBalance = Number(res.data.balance);
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
 	    document.getElementById('myBalanceBox').innerHTML=myBalance;
@@ -66,7 +66,7 @@ function transact() {
 		toastr.error("no valid address");
 		return;
 	}
-	let amount = document.getElementById("amount").value;
+	let amount = Number(document.getElementById("amount").value);
 	if(amount>myBalance) {
 		toastr.error("not enough tokens");
 		return;

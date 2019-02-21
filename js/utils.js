@@ -20,3 +20,16 @@ function hexToBytes(hex) {
 
   return Buffer.from(hex, 'hex');
 }
+
+function unixtimeToDate(timestamp) {
+	var date = new Date(timestamp*1000);
+	var hours = date.getHours();
+	var minutes = "0" + date.getMinutes();
+	var seconds = "0" + date.getSeconds();
+	var days = date.getDate();
+	var month = date.getMonth();
+	var year = date.getFullYear();
+
+	var formattedTime = year + '/' + month + '/' + days + ', ' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+	return formattedTime;
+}
