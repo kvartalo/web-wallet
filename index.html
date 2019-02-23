@@ -14,6 +14,9 @@
 
   <!-- toastr -->
   <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
+
+  <!-- to delete and use another in the future -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body class="dark-theme">
@@ -39,7 +42,7 @@
 	  </div>
       </div>
       <div onclick="scanQR()" class="btn btn-outline-light">
-        Scan QR
+	      <i class="fas fa-camera"></i>
       </div>
     </div>
   </nav>
@@ -47,8 +50,11 @@
   <br>
 
   <div class="container">
-    <div id="qrscannerBox" class="card invisible">
-      <video id="preview"></video>
+    <div id="qrscannerBox" class="card invisible" style="text-align: center;">
+      <video id="preview" style="max-width:300px;"></video>
+      <div onclick="cancelScanQR()" class="btn btn-outline-danger">
+	      Cancel
+      </div>
     </div><br>
     <div class="row">
       <div class="col-md-2">
@@ -57,13 +63,13 @@
         <div class="card">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send" aria-selected="true"
+                <a class="nav-link active" id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive" aria-selected="true"
 			onclick="getBalance()">
                   Receive
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive" aria-selected="false">
+                <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send" aria-selected="false">
                   Send
                 </a>
               </li>
@@ -76,7 +82,7 @@
             </ul>
                 <div class="card-body">
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="send" role="tabpanel" aria-labelledby="send-tab">
+              <div class="tab-pane fade show active" id="receive" role="tabpanel" aria-labelledby="receive-tab">
                 <h5 class="card-title">My Wallet</h5>
                 <p class="card-text">
                   <div>
@@ -92,7 +98,7 @@
 			<span id="myBalanceBox">0</span> KVT
 		      </span>
 		      <div onclick="getBalance()" class="btn btn-outline-light btn-sm" title="this will be automatic in next version">
-			Refresh
+		        <i class="fas fa-sync-alt"></i>
 		      </div>
                   </div>
 		  <br><br>
@@ -102,7 +108,7 @@
 		  </div>
                 </p>
               </div>
-              <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
+              <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
                 <h5 class="card-title">New Tx</h5>
                 <p class="card-text">
                   <div class="form-group">
@@ -118,7 +124,7 @@
 		  <span class="sr-only">Loading...</span>
 	      	</div>
               </div>
-              <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="receive-tab">
+              <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                 <h5 class="card-title">History</h5>
 		<ul class="list-group" id="historyBox">
                   <!-- filled by js -->
@@ -139,6 +145,7 @@
 
 
 
+<!-- <script type="text/javascript" src="lib/instascan-browserified.js"></script> -->
 <script type="text/javascript" src="lib/instascan.min.js"></script>
 <script type="text/javascript" src="lib/qrcode.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>

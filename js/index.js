@@ -5,7 +5,7 @@ const uint256 = n => "0x"+n.toString(16).padStart(64,'0')
 const uint8 = n => "0x"+n.toString(16)
 
 const RELAYURL = 'http://127.0.0.1:3000';
-const TOKENADDR = '0x9BD08b875A9Bf7Fc6889390bE4704458cD695074';
+const TOKENADDR = '0x224FA23ff195C3Acb4A5ea41D2a5295ebe87A0fe';
 
 let myAddr = "";
 let myBalance = 0;

@@ -32,3 +32,13 @@ browserify index.js --standalone bip39 > bip39-browserified.js
 ```
 browserify hdkey.js --standalone hdkey > hdkey-browserified.js
 ```
+
+- instascan
+```
+browserify index.js --standalone instascan > instascan-browserified.js
+```
+
+- qrcode
+```
+browserify index.js --standalone qrcode > qrcode-browserified.js
+```
