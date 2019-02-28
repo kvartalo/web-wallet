@@ -1,4 +1,4 @@
-var web3 = new Web3(new Web3.providers.HttpProvider('https://testnet-rpc.gochain.io'));
+var web3 = new Web3(new Web3.providers.HttpProvider(''));
 const buf = b => ethUtil.toBuffer(b)
 const sha3 = b => web3.utils.soliditySha3(b)
 const uint256 = n => "0x"+n.toString(16).padStart(64,'0')
@@ -118,7 +118,13 @@ getBalance();
 
 
 /*
-TODO (for minimal version):
-- scan QR with cam
-- better UX flow
+	todo
+	- web-wallet
+		- remember theme mode
+		- allow to share address with url
+		- add address searcher (to view history of searched address)
+	- smart contracts + web-wallet
+		- add 2 decimals to smart contract
+		- add name/alias to address (in smart contracts)
+
 */
