@@ -19,7 +19,7 @@ function importSeed() {
 	localStorage.setItem("myAddr", obj.address);
 	localStorage.setItem("mySeed", obj.mnemonic);
 	console.log("seed", obj.mnemonic);
-	toastr.success("New wallet created! Address: " + obj.address);
+	toastr.success("Nova cartera creada! Adreça: " + obj.address);
 
 	window.location.assign("/");
 }

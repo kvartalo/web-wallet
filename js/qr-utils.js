@@ -11,7 +11,7 @@ function scanQR() {
   scanner.addListener('scan', function (content) {
     console.log('scanned!');
     console.log(content);
-    toastr.success(content + " scanned");
+    toastr.success(content + " llegit");
     $('#myTab a[href="#send"]').tab('show');
     document.getElementById("toAddr").value = content;
     document.getElementById('qrscannerBox').className = 'card invisible';
@@ -21,7 +21,7 @@ function scanQR() {
       scanner.start(cameras[0]);
       camInitialized=true;
     } else {
-      console.error('No cameras found.');
+      console.error('No es pot localitzar cap càmara');
     }
   }).catch(function (e) {
     console.error(e);

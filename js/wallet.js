@@ -1,11 +1,11 @@
 function resetWallet() {
-	var r = confirm("Your private keys will be lost. Are you sure to reset your wallet?");
+	var r = confirm("Si no has fet una còpia de la clau mestre no podreu recuperar la cartera. Estas segur?");
 	if (r == true) {
-	  toastr.info("Starting to reset the wallet");
+	  toastr.info("Generant una nova cartera");
 	  localStorage.clear();
 	  location.reload();
 	} else {
-	  toastr.info("Wallet reset canceled");
+	  toastr.info("Heu cancelat Wallet reset canceled");
 	}
 }
 

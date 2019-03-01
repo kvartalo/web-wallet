@@ -6,7 +6,7 @@ function selectAndCopy(e) {
   let copyText = e;
   copyText.select();
   document.execCommand("copy");
-  toastr.success("data copied");
+  toastr.success("dades copiades al portaretalls");
 }
 
 function bytesToHex(buff) {
