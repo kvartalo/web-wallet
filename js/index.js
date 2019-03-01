@@ -25,7 +25,7 @@ if (localStorage.getItem("myAddr")===null) {
 	localStorage.setItem("myAddr", obj.address);
 	localStorage.setItem("mySeed", obj.mnemonic);
 	console.log("seed", obj.mnemonic);
-	toastr.success("New wallet created! Address: " + obj.address);
+	toastr.success("Nova cartera creada! Adreça: " + obj.address);
 }
 myAddr = localStorage.getItem("myAddr");
 console.log("myAddr", myAddr);
@@ -37,7 +37,7 @@ new QRCode(document.getElementById('qrcode'), myAddr);
 document.getElementById('myAddrBox').value=myAddr;
 
 function getBalance() {
-	console.log("getting balance");
+	console.log("recuperant saldo");
 	document.getElementById('spinnerBalance').className = 'spinner-border';
 	// show current myAddr balance
 	axios.get(RELAYURL + '/balance/' + myAddr)
@@ -59,20 +59,20 @@ function getBalance() {
 function transact() {
 	let toAddr = document.getElementById("toAddr").value;
 	if(toAddr==undefined) {
-		toastr.error("no valid address");
+		toastr.error("adreça invàlida");
 		return;
 	}
 	if(toAddr=="") { // TODO check also if it's a valid eth address
-		toastr.error("no valid address");
+		toastr.error("adreça invàlida");
 		return;
 	}
 	let amount = Number(document.getElementById("amount").value);
 	if(amount>myBalance) {
-		toastr.error("not enough tokens");
+		toastr.error("no hi ha prou saldo");
 		return;
 	}
 	if(amount<=0) {
-		toastr.error("not valid amount");
+		toastr.error("la quantitat no es correcte");
 		return;
 	}
 	document.getElementById('spinnerTx').className = 'spinner-border';
@@ -97,7 +97,7 @@ function transact() {
 		axios.post(RELAYURL + '/tx', txData)
 		  .then(function (res) {
 		    console.log(res.data);
-		    toastr.success("transaction created");
+		    toastr.success("transferència realitzada");
 			  document.getElementById('spinnerTx').className += 'invisible';
 		  })
 		  .catch(function (error) {

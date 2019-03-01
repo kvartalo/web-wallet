@@ -1,8 +1,8 @@
 function generateHistoryElement(ownAddr, from, to, value, date) {
 	if (from==ownAddr) {
-		from="Me";
+		from="Jo";
 	} else if (to==ownAddr) {
-		to = "Me";
+		to = "Jo";
 	}
   let html = '';
   html += `
@@ -66,7 +66,7 @@ function generateHistoryChart(ownAddr, transfers) {
 	};
 	for(let i=transfers.length-1; i>=0; i--) {
 		if(transfers[i].Value>0) {
-			data.datasets[0].label = "balance";
+			data.datasets[0].label = "saldo";
 			if (transfers[i].From==ownAddr) {
 				ab = ab - transfers[i].Value;
 			} else if (transfers[i].To==ownAddr) {

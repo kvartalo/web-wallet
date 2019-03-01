@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>kvartalo web wallet</title>
+  <title>Cartera kvartalo</title>
   <link rel="icon" type="image/png" href="img/web-wallet-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
@@ -21,7 +21,7 @@
   <nav class="navbar navbar-dark bg-dark" style="color:#ffffff;">
     <a class="navbar-brand" href="/">
       <img src="img/web-wallet-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      kvartalo web-wallet
+      Cartera kvartalo
     </a>
   </nav>
 
@@ -34,17 +34,17 @@
       <div class="col-md-6">
         <div class="card">
 	  <div class="card-body">
-	    <h3>Import seed</h3>
-	    <p>Write here your seed</p>
+	    <h3>Regenerar cartera desde clau mestre</h3>
+	    <p>Escriu la clau mestre aqui</p>
 	    <input id="seed"
 	      type="text" placeholder="my seed"
 	      class="form-control">
 	      <br>
 	      <a href="/" class="btn btn-outline-danger btn-sm">
-		Cancel
+		Cancel·lar
 	      </a>
 	      <div onclick="importSeed()" class="btn btn-outline-info btn-sm float-right">
-		Recover
+		Regenerar
 	      </div>
 	  </div>
         </div>
@@ -55,7 +55,7 @@
   <div style="margin-bottom:0;margin-right:10px;"
 	  class="float-right btn btn-outilne-dark"
 	  title="reset wallet" onclick="resetWallet()">
-	  Reset Wallet
+	  Esborra cartera actual i crea una nova
   </div>
 
 
