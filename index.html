@@ -27,7 +27,7 @@
       Kvartalo
     </a>
       <div class="float-right">
-  
+
       <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
         <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
         <label class="onoffswitch-label" for="themeSwitcher"></label>
@@ -133,15 +133,82 @@
                       <span class="sr-only">Carregant...</span>
                     </div>
                     Adreça:
-                    <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text"
-                      placeholder="my address" class="form-control">
+                    <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text" placeholder="my address" class="form-control">
+                  </div>
                 </p>
               </div>
-              <!-- recieve -->
-              <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="receive-tab">
-                <h5 class="card-title">Configuració</h5>
-                <p class="card-text">
-                </p>
+              <!-- config -->
+              <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                <h5>Configuració general</h5>
+                <hr>
+                Tema visual:
+                <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
+                  <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
+                  <label class="onoffswitch-label" for="themeSwitcher"></label>
+                </div>
+                <br><br>
+                <h5>Còpia de seguretat</h5>
+                <hr>
+                <div class="accordion" id="accordionExample">
+                  <div>
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn color_primary collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="showSeed()">
+                          Desa còpia de seguretat
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+
+                        <h3>Copia seguretat cartera</h3>
+                        <p>Descarrega la còpia de seguretat i guarda-la en un lloc segur</p>
+                        <div onclick="downloadBackup()" class="btn btn-sm color_primary float-right">Descarrega</div>
+                        <br>
+                        <hr>
+                        <p>Alternativament, escriu aquestes paraules en un paper i desa-ho en un lloc segur</p>
+                        <code id="seed" class="disable-selection"></code>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button class="btn color_primary collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Importa còpia de seguretat
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      <div class="card-body">
+
+                        <h3>Regenerar cartera desde clau mestre</h3>
+                        <p>Recupera des d'un fitxer</p>
+                        <div class="upload-btn-wrapper float-right">
+                          <div class="btn color_primary">Carrega el fitxer de backup</div>
+                          <input id="backup-upload" type="file" accept="text/backup" name="backupFile" oninput="uploadBackup()" />
+                        </div>
+                        <br><br>
+                        <hr>
+                        <p>Alternativament, recupera a partir de la 'seed'. Escriu la clau mestre aquí</p>
+                        <input id="seed" type="text" placeholder="my seed" class="form-control">
+                        <br>
+                        <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
+                          Regenerar
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h5>Esborrat</h5>
+                <hr>
+                <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outline-danger" title="reset wallet" onclick="resetWallet()">
+                  Esborra cartera actual i crea una nova cartera
+                </div>
               </div>
             </div>
           </div>
@@ -149,10 +216,6 @@
         <br>
       </div>
     </div>
-  </div>
-  <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outilne-dark" title="reset wallet"
-    onclick="resetWallet()">
-    Esborra cartera actual i crea una nova
   </div>
 
 
@@ -163,15 +226,12 @@
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/toastr/build/toastr.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
   <script>
     let theme = "dark-theme";
+
     function switchThemeClick() {
       console.log(document.getElementById("themeSwitcher").checked);
       if (document.getElementById("themeSwitcher").checked === true) {
@@ -210,6 +270,7 @@
   <script src="lib/bip39-browserified.js"></script>
   <script src="lib/hdkey-browserified.js"></script>
   <script src="js/utils.js"></script>
+  <script src="js/settings.js"></script>
   <script src="js/qr-utils.js"></script>
   <script src="js/wallet.js"></script>
   <script src="js/history.js"></script>
