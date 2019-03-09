@@ -10,6 +10,7 @@ const TOKENADDR = '0x224FA23ff195C3Acb4A5ea41D2a5295ebe87A0fe';
 let myAddr = "";
 let myBalance = 0;
 let myNonce = 0;
+let initialized = false;
 
 console.log("myAddr", localStorage.getItem("myAddr"));
 console.log("mySeed", localStorage.getItem("mySeed"));
@@ -42,6 +43,15 @@ function getBalance() {
 	// show current myAddr balance
 	axios.get(RELAYURL + '/balance/' + myAddr)
 	  .then(function (res) {
+			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+						
+			if (initialized && myBalance != Number(res.data.balance)) {
+				beep();
+				loadHistory();
+			} else {
+				initialized = true;
+			}
+
 	    myBalance = Number(res.data.balance);
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
@@ -97,7 +107,8 @@ function transact() {
 		axios.post(RELAYURL + '/tx', txData)
 		  .then(function (res) {
 		    console.log(res.data);
-		    toastr.success("transferència realitzada");
+				toastr.success("transferència realitzada");
+				$('.nav-tabs a[href="#history"]').tab('show');
 			  document.getElementById('spinnerTx').className += 'invisible';
 		  })
 		  .catch(function (error) {
@@ -159,10 +170,17 @@ function onConfigTabActivated() {
 	stopScanQR();
 }
 
+function refreshBalance() {
+	getBalance();
+	setTimeout(function(){
+		refreshBalance();
+	}, 5000);
+}
+
 
 onSendDataChanged();
 loadHistory();
-getBalance();
+refreshBalance();
 
 /*
 	todo

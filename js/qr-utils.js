@@ -26,7 +26,6 @@ function startScanQR() {
     document.getElementById("toAddr").value = content;
     document.getElementById('toAddr').className = 'form-control';
     document.getElementById('qrscannerBox').className = 'card invisible';
-    beep();
     $("#amount").focus()
   });
   Instascan.Camera.getCameras().then(function (cameras) {
