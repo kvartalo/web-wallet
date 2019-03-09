@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="css/switch-button.css">
   <link rel="stylesheet" href="css/dark-theme.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
 
   <!-- toastr -->
   <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
@@ -20,175 +21,183 @@
 
 <body class="dark-theme">
 
-        <div class="card mainBox">
-          <!-- menu -->
-          <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab"
-                aria-controls="history" aria-selected="false" onclick="onHistoryTabActivated()" title="Refresh History">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send"
-                aria-selected="false" onclick="onSendTabActivated()">
-                <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive"
-                aria-selected="true" onclick="onRecieveTabActivated()">
-                <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " onclick="onConfigTabActivated()" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="receive"
-                  aria-selected="true">
-                  <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
-          <div class="card-body">
-            <!-- menu -->
-            <div class="tab-content" id="myTabContent">
-              <!-- historic -->
-              <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
-                <div class="balanceBox">
-                  Saldo actual
-                  <h3>
-                    <span id="myBalanceBox">0</span> KVT
-                  </h3>
-                  <span id="myAddrLabel"></span>
-                </div>
+  <div class="card mainBox">
+    <!-- menu -->
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history"
+          aria-selected="false" onclick="onHistoryTabActivated()" title="Refresh History">
+          <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send"
+          aria-selected="false" onclick="onSendTabActivated()">
+          <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive"
+          aria-selected="true" onclick="onRecieveTabActivated()">
+          <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " onclick="onConfigTabActivated()" id="config-tab" data-toggle="tab" href="#config"
+          role="tab" aria-controls="receive" aria-selected="true">
+          <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="card-body">
+      <!-- menu -->
+      <div class="tab-content" id="myTabContent">
+        <!-- historic -->
+        <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+          <div class="balanceBox">
+            Saldo actual
+            <h3>
+              <span id="myBalanceBox">0</span> KVT
+            </h3>
+            <span id="myAddrLabel"></span>
+          </div>
 
-                <br>
-                <!-- <span class="badge color_primary float-right" style="font-size:medium;">
+          <br>
+          <!-- <span class="badge color_primary float-right" style="font-size:medium;">
                   <span id="myBalanceBox">0</span> KVT
                 </span>
                 <h5 class="card-title">Saldo actual</h5> -->
-                <h5 class="card-title">Històric</h5>
-                <hr>
-                <canvas id="historyChart" width="400" height="200"></canvas>
-                <ul class="list-group" id="historyBox">
-                  <!-- filled by js -->
-                </ul>
-              </div>
-              <!-- send -->
-              <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
-                <h5 class="card-title">Enviar nova transferència</h5>
-                <hr>
-                <p class="card-text">
-                  <div class="form-group">
-                    <label for="amount">Escanejar QR destinatari</label>
-                    <div id="qrscannerBox" class="card invisible" style="text-align: center;">
-                        <video id="preview" style="max-height:200px;"></video>
-                      <div onclick="cancelScanQR()" class="btn btn-outline-warning">
-                        Entrar la direcció manualment
-                      </div>
-                    </div>
-                    <input id="toAddr" type="text" class="form-control invisible" placeholder="Adreça destí">
-                    <br>
-                    <label id="amountlabel" for="amount">Quantitat</label>
-                    <input id="amount" type="number" class="form-control-lg text-right" placeholder="0.00" value="">
-                  </div>
-                </p>
-                <br>
-                <button id="sendButton" onclick="transact()" class="btn color_primary float-right">
-                  Enviar
-                </button>
-                <div id="spinnerTx" class="spinner-border invisible" role="status">
-                  <span class="sr-only">Carregant...</span>
+          <h5 class="card-title">Històric</h5>
+          <hr>
+          <canvas id="historyChart" width="400" height="200"></canvas>
+          <ul class="list-group" id="historyBox">
+            <!-- filled by js -->
+          </ul>
+        </div>
+        <!-- send -->
+        <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
+          <h5 class="card-title">Enviar nova transferència</h5>
+          <hr>
+          <p class="card-text">
+            <div class="form-group">
+              <label for="amount">Escanejar QR destinatari</label>
+              <div id="changeCameraButton" class="btn btn-sm btn-outline-info invisible" onclick="changeCameraButton()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;<i
+                  class="fa fa-video-camera" aria-hidden="true"></i></div>
+              <div id="qrscannerBox" class="card invisible" style="text-align: center;">
+                <video id="preview" style="max-height:200px;"></video>
+                <div onclick="cancelScanQR()" class="btn btn-outline-warning">
+                  Entrar la direcció manualment
                 </div>
               </div>
-              <!-- recieve -->
-              <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
-                <h5 class="card-title">Rebre transferència</h5>
-                <hr>
-                <p class="card-text">
-                    <div id="qrcode"></div>
-                    <div id="spinnerBalance" class="spinner-border" role="status">
-                      <span class="sr-only">Carregant...</span>
-                    </div>
-                    Adreça:
-                    <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text" placeholder="my address" class="form-control">
-                </p>
+              <input id="toAddr" type="text" class="form-control invisible" placeholder="Adreça destí">
+              <br>
+              <label id="amountlabel" for="amount">Quantitat</label>
+              <input id="amount" type="number" class="form-control-lg text-right" placeholder="0.00" value="">
+            </div>
+          </p>
+          <br>
+          <button id="sendButton" onclick="transact()" class="btn color_primary float-right">
+            Enviar
+          </button>
+          <div id="spinnerTx" class="spinner-border invisible" role="status">
+            <span class="sr-only">Carregant...</span>
+          </div>
+        </div>
+        <!-- recieve -->
+        <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
+          <h5 class="card-title">Rebre transferència</h5>
+          <hr>
+          <p class="card-text">
+            <div id="qrcode"></div>
+            <div id="spinnerBalance" class="spinner-border" role="status">
+              <span class="sr-only">Carregant...</span>
+            </div>
+            Adreça:
+            <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text" placeholder="my address"
+              class="form-control">
+          </p>
+        </div>
+        <!-- config -->
+        <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+          <h5>Configuració general</h5>
+          <hr>
+          Tema visual:
+          <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
+            <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+              id="themeSwitcher" checked>
+            <label class="onoffswitch-label" for="themeSwitcher"></label>
+          </div>
+          <br><br>
+          <h5>Còpia de seguretat</h5>
+          <hr>
+          <div class="accordion" id="accordionExample">
+            <div>
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn color_primary collapsed" type="button" data-toggle="collapse"
+                    data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="showSeed()">
+                    Desa còpia de seguretat
+                  </button>
+                </h2>
               </div>
-              <!-- config -->
-              <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
-                <h5>Configuració general</h5>
-                <hr>
-                Tema visual:
-                <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
-                  <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
-                  <label class="onoffswitch-label" for="themeSwitcher"></label>
+
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+
+                  <h3>Copia seguretat cartera</h3>
+                  <p>Descarrega la còpia de seguretat i guarda-la en un lloc segur</p>
+                  <div onclick="downloadBackup()" class="btn btn-sm color_primary float-right">Descarrega</div>
+                  <br>
+                  <hr>
+                  <p>Alternativament, escriu aquestes paraules en un paper i desa-ho en un lloc segur</p>
+                  <code id="seed" class="disable-selection"></code>
+
                 </div>
-                <br><br>
-                <h5>Còpia de seguretat</h5>
-                <hr>
-                <div class="accordion" id="accordionExample">
-                  <div>
-                    <div class="card-header" id="headingOne">
-                      <h2 class="mb-0">
-                        <button class="btn color_primary collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="showSeed()">
-                          Desa còpia de seguretat
-                        </button>
-                      </h2>
-                    </div>
+              </div>
+            </div>
+            <div>
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn color_primary collapsed" type="button" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Importa còpia de seguretat
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="card-body">
-
-                        <h3>Copia seguretat cartera</h3>
-                        <p>Descarrega la còpia de seguretat i guarda-la en un lloc segur</p>
-                        <div onclick="downloadBackup()" class="btn btn-sm color_primary float-right">Descarrega</div>
-                        <br>
-                        <hr>
-                        <p>Alternativament, escriu aquestes paraules en un paper i desa-ho en un lloc segur</p>
-                        <code id="seed" class="disable-selection"></code>
-
-                      </div>
-                    </div>
+                  <h3>Regenerar cartera desde clau mestre</h3>
+                  <p>Recupera des d'un fitxer</p>
+                  <div class="upload-btn-wrapper float-right">
+                    <div class="btn color_primary">Carrega el fitxer de backup</div>
+                    <input id="backup-upload" type="file" accept="text/backup" name="backupFile"
+                      oninput="uploadBackup()" />
                   </div>
-                  <div>
-                    <div class="card-header" id="headingTwo">
-                      <h2 class="mb-0">
-                        <button class="btn color_primary collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Importa còpia de seguretat
-                        </button>
-                      </h2>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                      <div class="card-body">
-
-                        <h3>Regenerar cartera desde clau mestre</h3>
-                        <p>Recupera des d'un fitxer</p>
-                        <div class="upload-btn-wrapper float-right">
-                          <div class="btn color_primary">Carrega el fitxer de backup</div>
-                          <input id="backup-upload" type="file" accept="text/backup" name="backupFile" oninput="uploadBackup()" />
-                        </div>
-                        <br><br>
-                        <hr>
-                        <p>Alternativament, recupera a partir de la 'seed'. Escriu la clau mestre aquí</p>
-                        <input id="seed-input" type="text" placeholder="my seed" class="form-control">
-                        <br>
-                        <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
-                          Regenerar
-                        </div>
-
-                      </div>
-                    </div>
+                  <br><br>
+                  <hr>
+                  <p>Alternativament, recupera a partir de la 'seed'. Escriu la clau mestre aquí</p>
+                  <input id="seed-input" type="text" placeholder="my seed" class="form-control">
+                  <br>
+                  <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
+                    Regenerar
                   </div>
-                </div>
 
-                <h5>Esborrat</h5>
-                <hr>
-                <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outline-danger" title="reset wallet" onclick="resetWallet()">
-                  Esborra cartera actual i crea una nova cartera
                 </div>
               </div>
             </div>
           </div>
+
+          <h5>Esborrat</h5>
+          <hr>
+          <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outline-danger"
+            title="reset wallet" onclick="resetWallet()">
+            Esborra cartera actual i crea una nova cartera
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -198,8 +207,12 @@
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/toastr/build/toastr.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 
   <script>
     let theme = localStorage.getItem("theme");

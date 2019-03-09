@@ -1,20 +1,17 @@
 let camInitialized = false;
 let scanner;
-let camera;
+let cameras;
+let cameraIndex;
 
 function stopScanQR() {
   if (camInitialized) {
-    scanner.stop(camera);
+    scanner.stop(cameras[cameraIndex]);
     return;
   }
 }
 
 function startScanQR() {
   document.getElementById('qrscannerBox').className = 'card';
-  if (camInitialized) {
-    scanner.start(camera);
-    return;
-  }
 
   // https://github.com/schmich/instascan
   scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
@@ -28,11 +25,15 @@ function startScanQR() {
     document.getElementById('qrscannerBox').className = 'card invisible';
     $("#amount").focus()
   });
-  Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-      camera = cameras[0];
-      scanner.start(camera);
+  Instascan.Camera.getCameras().then(function (_cameras) {
+    cameras = _cameras;
+    if (_cameras.length > 0) {
+      cameraIndex = cameras.length - 1;
+      scanner.start(cameras[cameraIndex]);
       camInitialized = true;
+      if (cameras.length > 1) {
+        $("#changeCameraButton").removeClass("invisible") 
+      }
     } else {
       console.error('No es pot localitzar cap càmara');
     }
@@ -44,5 +45,12 @@ function startScanQR() {
 function cancelScanQR() {
   document.getElementById('qrscannerBox').className = 'card invisible';
   document.getElementById('toAddr').className = 'form-control';
+  $("#changeCameraButton").addClass("invisible") 
+  stopScanQR();
 }
 
+function changeCameraButton() {
+  stopScanQR()
+  cameraIndex = (cameraIndex+1)%cameras.length;
+  scanner.start(cameras[cameraIndex]);
+}
