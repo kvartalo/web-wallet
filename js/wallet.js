@@ -1,11 +1,11 @@
 function resetWallet() {
-	var r = confirm("Si no has fet una còpia de la clau mestre no podreu recuperar la cartera. Estas segur?");
+	var r = confirm("Si no has fet una còpia de seguretat no podràs recuperar la cartera. Estàs segur d'esborrar la memòria?");
 	if (r == true) {
 	  toastr.info("Generant una nova cartera");
 	  localStorage.clear();
 	  location.reload();
 	} else {
-	  toastr.info("Heu cancelat Wallet reset canceled");
+	  toastr.info("Heu cancel·lat. Wallet reset canceled");
 	}
 }
 

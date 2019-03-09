@@ -10,6 +10,9 @@ a:hover {
 	color: #5ae1cd!important;
 	text-decoration: none!important;
 }
+.btn {
+	cursor: pointer;
+}
 
 hr {
 	height: 2px!important;
