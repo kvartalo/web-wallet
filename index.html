@@ -20,15 +20,9 @@
 
 <body class="dark-theme">
 
-  <div>
-    <br>
-    <div class="row">
-      <div class="col-md-2">
-      </div>
-      <div class="col-md-8">
-        <div class="card">
+        <div class="card mainBox">
           <!-- menu -->
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab"
                 aria-controls="history" aria-selected="false" onclick="onHistoryTabActivated()" title="Refresh History">
@@ -195,10 +189,6 @@
             </div>
           </div>
         </div>
-        <br>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -212,18 +202,26 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
   <script>
-    let theme = "dark-theme";
-
-    function switchThemeClick() {
-      console.log(document.getElementById("themeSwitcher").checked);
-      if (document.getElementById("themeSwitcher").checked === true) {
-        theme = "dark-theme";
-      } else {
-        theme = "light";
-      }
-      console.log(theme);
+    let theme = localStorage.getItem("theme");
+    if (theme === "light") {
+      document.getElementById("themeSwitcher").checked = false;
       document.body.className = theme;
     }
+
+    function switchThemeClick() {
+      theme = localStorage.getItem("theme");
+      if (theme === "light") {
+        document.getElementById("themeSwitcher").checked = true;
+        theme = "dark-theme";
+        localStorage.setItem("theme", theme);
+      } else {
+        document.getElementById("themeSwitcher").checked = false;
+        theme = "light";
+        localStorage.setItem("theme", theme);
+      }
+      document.body.className = theme;
+    }
+
     toastr.options = {
       "closeButton": false,
       "debug": false,

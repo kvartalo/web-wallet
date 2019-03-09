@@ -2,6 +2,11 @@
 main color: #5ae1cd
 */
 
+.mainBox {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
 a, a:link, a:visited, a:hover {
 	color: #5ae1cd!important;
 	text-decoration: none!important;
