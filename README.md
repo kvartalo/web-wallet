@@ -8,9 +8,14 @@ kvartalo web wallet app
 npm install
 ```
 
-And then serve in a server.
+And then serve in a server, remember that the contents shoule be served with https to allow camera QR scanning. 
 
+If you just want to test in the mobile, an option is to use the live-server-https package:
 
+```
+apt-get install -g live-server live-server-https
+live-server --https=`npm root -g`/live-server-https
+```
 
 ### lib generation
 This is already done.
