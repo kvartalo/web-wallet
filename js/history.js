@@ -24,7 +24,7 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
     <div class="float-right">
       <span class="badge color_primary">
 			`;
-			
+
 	if (to=="Jo") {
 	      html += '+' + value;
 	} else {
@@ -67,6 +67,7 @@ function generateHistoryChart(ownAddr, transfers) {
 	let data = {
 		labels: [],
 		datasets: [{
+			steppedLine: true,
 			data: [],
 			borderColor: [
 				'#5ae1cd'
@@ -75,7 +76,7 @@ function generateHistoryChart(ownAddr, transfers) {
 	};
 	for(let i=transfers.length-1; i>=0; i--) {
 		if(transfers[i].Value>0) {
-			data.datasets[0].label = "saldo";
+			// data.datasets[0].label = "saldo";
 			if (transfers[i].From==ownAddr) {
 				ab = ab - transfers[i].Value;
 			} else if (transfers[i].To==ownAddr) {
@@ -90,14 +91,24 @@ function generateHistoryChart(ownAddr, transfers) {
 	// print chart
 	var ctx = document.getElementById("historyChart").getContext('2d');
 	var options= {
+		legend : {
+		  display: false
+		},
 		scales: {
-		    yAxes: [{
-			ticks: {
-			    beginAtZero:true
-			}
-		    }]
+			xAxes: [
+				{
+					display: false
+				}
+			],
+		  yAxes: [
+		    {
+		      ticks: {
+		        beginAtZero: true
+		      }
+		    }
+		  ]
 		}
-	    };
+	};
 	var myLineChart = new Chart(ctx, {
 	    type: 'line',
 	    data: data,
@@ -109,4 +120,3 @@ function loadHistory() {
 	getHistory(myAddr);
 	getBalance();
 }
-

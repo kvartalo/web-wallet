@@ -64,3 +64,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cee6', end
   top: 0;
   opacity: 0;
 }
+
+.balanceBox {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00cee6+0,5ae1cd+98 */
+	background: #00cee6; /* Old browsers */
+	background: -moz-linear-gradient(left, #00cee6 0%, #5ae1cd 98%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #00cee6 0%,#5ae1cd 98%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #00cee6 0%,#5ae1cd 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cee6', endColorstr='#5ae1cd',GradientType=1 ); /* IE6-9 */
+
+	color: #ffffff!important;
+	text-align: center;
+
+	border-radius: 5px;
+	padding: 10px;
+	/* box-shadow: 0px 0px 30px grey; */
+}
+.balanceBox > h3 {
+	font-weight: 900;
+}
