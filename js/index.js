@@ -36,6 +36,7 @@ console.log("myAddr", myAddr);
 new QRCode(document.getElementById('qrcode'), myAddr);
 // show myAddr
 document.getElementById('myAddrBox').value=myAddr;
+document.getElementById('myAddrLabel').innerHTML=myAddr.slice(2,9);
 
 function getBalance() {
 	console.log("recuperant saldo");
@@ -190,7 +191,6 @@ refreshBalance();
 /*
 	todo
 	- web-wallet
-		- remember theme mode
 		- allow to share address with url
 		- add address searcher (to view history of searched address)
 	- smart contracts + web-wallet

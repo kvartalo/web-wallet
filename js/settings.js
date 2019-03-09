@@ -34,15 +34,15 @@ function uploadBackup() {
 	let f = document.getElementById('backup-upload').files[0];
 	console.log(f);
 	var r = new FileReader();
-    
-	r.onload = function(e) { 
+
+	r.onload = function(e) {
 		var contents = e.target.result;
-		console.log( "Got the file.n" 
+		console.log( "Got the file.n"
 		      +"name: " + f.name + "n"
 		      +"type: " + f.type + "n"
 		      +"size: " + f.size + " bytesn"
 		      + "starts with: " + contents.substr(1, contents.indexOf("n"))
-		);  
+		);
 		console.log(contents);
 		console.log(atob(contents));
 		importSeed(atob(contents));
@@ -55,7 +55,7 @@ function uploadBackup() {
 function showSeed() {
 	if (localStorage.getItem("myAddr")===null) {
 		window.location.assign("/");
-	} 
+	}
 	let mySeed = localStorage.getItem("mySeed");
 	console.log("mySeed", mySeed);
 
@@ -64,7 +64,7 @@ function showSeed() {
 
 
 function importInputSeed() {
-	var seed = document.getElementById("seed").value;
+	var seed = document.getElementById("seed-input").value;
 	importSeed(seed);
 }
 

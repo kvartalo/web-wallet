@@ -59,11 +59,21 @@
             <div class="tab-content" id="myTabContent">
               <!-- historic -->
               <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
-                <span class="badge color_primary float-right" style="font-size:medium;">
+                <div class="balanceBox">
+                  Saldo actual
+                  <h3>
+                    <span id="myBalanceBox">0</span> KVT
+                  </h3>
+                  <span id="myAddrLabel"></span>
+                </div>
+
+                <br>
+                <!-- <span class="badge color_primary float-right" style="font-size:medium;">
                   <span id="myBalanceBox">0</span> KVT
                 </span>
-                <h5 class="card-title">Saldo actual</h5>
+                <h5 class="card-title">Saldo actual</h5> -->
                 <h5 class="card-title">Històric</h5>
+                <hr>
                 <canvas id="historyChart" width="400" height="200"></canvas>
                 <ul class="list-group" id="historyBox">
                   <!-- filled by js -->
@@ -72,6 +82,7 @@
               <!-- send -->
               <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
                 <h5 class="card-title">Enviar nova transferència</h5>
+                <hr>
                 <p class="card-text">
                   <div class="form-group">
                     <label for="amount">Escanejar QR destinatari</label>
@@ -98,6 +109,7 @@
               <!-- recieve -->
               <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
                 <h5 class="card-title">Rebre transferència</h5>
+                <hr>
                 <p class="card-text">
                     <div id="qrcode"></div>
                     <div id="spinnerBalance" class="spinner-border" role="status">
@@ -163,7 +175,7 @@
                         <br><br>
                         <hr>
                         <p>Alternativament, recupera a partir de la 'seed'. Escriu la clau mestre aquí</p>
-                        <input id="seed" type="text" placeholder="my seed" class="form-control">
+                        <input id="seed-input" type="text" placeholder="my seed" class="form-control">
                         <br>
                         <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
                           Regenerar
