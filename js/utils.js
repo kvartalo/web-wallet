@@ -4,13 +4,24 @@ function beep() {
   snd.play();
 }
 
+function shareAddress() {
+  try {
+    navigator.share({
+      text: $("#myAddrBox").val()
+    })
+  } catch {
+    const e = document.getElementById("myAddrBox")
+    selectAndCopy(e)
+  }
+}
+
 function selectAndCopy(e) {
   e.focus();
   e.select()
   let copyText = e;
   copyText.select();
   document.execCommand("copy");
-  toastr.success("dades copiades al portaretalls");
+  toastr.success("dades copiades al portaretalls");  
 }
 
 function bytesToHex(buff) {

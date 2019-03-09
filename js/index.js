@@ -34,6 +34,7 @@ console.log("myAddr", myAddr);
 
 // show myAddr QR
 new QRCode(document.getElementById('qrcode'), myAddr);
+$("#qrcode > img").css({"margin":"auto"});
 // show myAddr
 document.getElementById('myAddrBox').value=myAddr;
 document.getElementById('myAddrLabel').innerHTML=myAddr.slice(2,9);

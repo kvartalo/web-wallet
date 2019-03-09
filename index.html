@@ -109,12 +109,11 @@
         <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
           <h5 class="card-title">Rebre transferència</h5>
           <hr>
-          <p class="card-text">
+          <div class="card-text" style="align-content: center">
             <div id="qrcode"></div>
-            Adreça:
-            <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text" placeholder="my address"
-              class="form-control">
-          </p>
+            <input id="myAddrBox" onclick="shareAddress()" readonly="readonly" type="text" placeholder="my address"
+              class="form-control" style="font-size: 8pt; border-width: 0; text-align: center">
+          </div>
         </div>
         <!-- config -->
         <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
