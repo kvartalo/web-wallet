@@ -80,14 +80,15 @@
           <hr>
           <p class="card-text">
             <div class="form-group">
-              <label for="amount">Escanejar QR destinatari</label>
+              <label for="amount">Escanejar QR destinatari</label>&nbsp;&nbsp;<div onclick="cancelScanQR()" class="btn btn-sm btn-outline-warning">
+                  Manual
+                </div>
+              
               <div id="changeCameraButton" class="btn btn-sm btn-outline-info invisible" onclick="changeCameraButton()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;<i
                   class="fa fa-video-camera" aria-hidden="true"></i></div>
-              <div id="qrscannerBox" class="card invisible" style="text-align: center;">
-                <video id="preview" style="max-height:200px;"></video>
-                <div onclick="cancelScanQR()" class="btn btn-outline-warning">
-                  Entrar la direcció manualment
-                </div>
+
+              <div id="qrscannerBox" class="card invisible" style="height:200px; display:flex; justify-content:center; overflow:hidden">
+                <video id="preview" ></video>
               </div>
               <input id="toAddr" type="text" class="form-control invisible" placeholder="Adreça destí">
               <br>
@@ -109,9 +110,6 @@
           <hr>
           <p class="card-text">
             <div id="qrcode"></div>
-            <div id="spinnerBalance" class="spinner-border" role="status">
-              <span class="sr-only">Carregant...</span>
-            </div>
             Adreça:
             <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text" placeholder="my address"
               class="form-control">

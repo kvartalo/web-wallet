@@ -40,7 +40,6 @@ document.getElementById('myAddrLabel').innerHTML=myAddr.slice(2,9);
 
 function getBalance() {
 	console.log("recuperant saldo");
-	document.getElementById('spinnerBalance').className = 'spinner-border';
 	// show current myAddr balance
 	axios.get(RELAYURL + '/balance/' + myAddr)
 	  .then(function (res) {
@@ -59,12 +58,10 @@ function getBalance() {
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
 	    document.getElementById('myBalanceBox').innerHTML=myBalance;
-	    document.getElementById('spinnerBalance').className += 'invisible';
 	  })
 	  .catch(function (error) {
 	    console.log(error);
 	    toastr.error(error);
-	    document.getElementById('spinnerBalance').className += 'invisible';
 	  });
 }
 
