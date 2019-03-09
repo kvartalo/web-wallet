@@ -16,17 +16,20 @@
   <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
 
   <!-- to delete and use another in the future -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body class="dark-theme">
   <!-- Image and text -->
-  <nav class="navbar navbar-dark bg-dark" style="color:#ffffff;">
+  <!--
+    nav class="navbar navbar-dark bg-dark" style="color:#ffffff;">
     <a class="navbar-brand" href="#">
       <img src="img/web-wallet-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      Cartera web kvartalo
+      Kvartalo
     </a>
-    <div class="float-right">
+      <div class="float-right">
+  
       <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
         <input onclick="switchThemeClick()" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="themeSwitcher" checked>
         <label class="onoffswitch-label" for="themeSwitcher"></label>
@@ -46,90 +49,99 @@
       </div>
     </div>
   </nav>
+-->
 
-  <br>
-
-  <div class="container">
-    <div id="qrscannerBox" class="card invisible" style="text-align: center;">
-      <video id="preview" style="max-width:300px;"></video>
-      <div onclick="cancelScanQR()" class="btn btn-outline-danger">
-	      Cancel·lar
-      </div>
-    </div><br>
+  <div>
+    <br>
     <div class="row">
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
         <div class="card">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive" aria-selected="true"
-			onclick="getBalance()">
-                  Rebre
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send" aria-selected="false">
-                  Enviar
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false"
-			onclick="loadHistory()" title="Refresh History">
-                  Històric
+          <!-- menu -->
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab"
+                aria-controls="history" aria-selected="false" onclick="loadHistory()" title="Refresh History">
+                KVARTALO
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send"
+                aria-selected="false" onclick="sendTabActivated()">
+                Enviar
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive"
+                aria-selected="true" onclick="getBalance()">
+                Rebre
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " id="receive-tab" data-toggle="tab" href="#config" role="tab" aria-controls="receive"
+                  aria-selected="true">
+                  Configuracio
                 </a>
               </li>
             </ul>
-                <div class="card-body">
+          <div class="card-body">
+            <!-- menu -->
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="receive" role="tabpanel" aria-labelledby="receive-tab">
-                <h5 class="card-title">La meva cartera</h5>
-                <p class="card-text">
-                  <div>
-                    Adreça:
-                    <input id="myAddrBox" onclick="selectAndCopy(this)"
-                      readonly="readonly" type="text" placeholder="my address"
-                      class="form-control">
-                  </div>
-		  <br>
-                  <div>
-			Saldo:
-		      <span class="badge color_primary" style="font-size:medium;">
-			<span id="myBalanceBox">0</span> KVT
-		      </span>
-		      <div onclick="getBalance()" class="btn btn-outline-light btn-sm" title="this will be automatic in next version">
-		        <i class="fas fa-sync-alt"></i>
-		      </div>
-                  </div>
-		  <br><br>
-                  <div id="qrcode"></div>
-		  <div id="spinnerBalance" class="spinner-border" role="status">
-		    <span class="sr-only">Carregant...</span>
-		  </div>
-                </p>
+              <!-- historic -->
+              <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+                <span class="badge color_primary float-right" style="font-size:medium;">
+                  <span id="myBalanceBox">0</span> KVT
+                </span>
+                <h5 class="card-title">Saldo actual</h5>
+                <h5 class="card-title">Històric</h5>
+                <canvas id="historyChart" width="400" height="200"></canvas>
+                <ul class="list-group" id="historyBox">
+                  <!-- filled by js -->
+                </ul>
               </div>
+              <!-- send -->
               <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
                 <h5 class="card-title">Nova transferència</h5>
                 <p class="card-text">
                   <div class="form-group">
-                    <input id="toAddr" type="text" class="form-control" placeholder="Adreça destí">
+                    <label for="amount">Destinatari</label>
+                    <div id="qrscannerBox" class="card invisible" style="text-align: center;">
+                        <video id="preview" style="max-height:200px;"></video>
+                      <div onclick="cancelScanQR()" class="btn btn-primary">
+                        Entrar la direcció manualment
+                      </div>
+                    </div>
+                    <input id="toAddr" type="text" class="form-control invisible" placeholder="Adreça destí">
                     <br>
-                    <input id="amount" type="number" class="form-control" placeholder="value" value="0">
+                    <label id="amountlabel" for="amount">Quantitat</label>
+                    <input id="amount" type="number" class="form-control-lg text-right" placeholder="0.00" value="">
                   </div>
                 </p>
-                <div onclick="transact()" class="btn color_primary float-right">
+                <br>
+                <button id="sendButton" onclick="transact()" class="btn color_primary float-right">
                   Enviar
+                </button>
+                <div id="spinnerTx" class="spinner-border invisible" role="status">
+                  <span class="sr-only">Carregant...</span>
                 </div>
-		<div id="spinnerTx" class="spinner-border invisible" role="status">
-		  <span class="sr-only">Carregant...</span>
-	      	</div>
               </div>
-              <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-                <h5 class="card-title">Històric</h5>
-		<canvas id="historyChart" width="400" height="200"></canvas>
-		<ul class="list-group" id="historyBox">
-                  <!-- filled by js -->
-                </ul>
+              <!-- recieve -->
+              <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
+                <p class="card-text">
+                  <div>
+                    <div id="qrcode"></div>
+                    <div id="spinnerBalance" class="spinner-border" role="status">
+                      <span class="sr-only">Carregant...</span>
+                    </div>
+                    Adreça:
+                    <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text"
+                      placeholder="my address" class="form-control">
+                  </div>
+                </p>
+              </div>
+              <!-- recieve -->
+              <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="receive-tab">
               </div>
             </div>
           </div>
@@ -138,67 +150,70 @@
       </div>
     </div>
   </div>
-  <div style="margin-bottom:0;margin-right:10px;"
-	  class="float-right btn btn-outilne-dark"
-	  title="reset wallet" onclick="resetWallet()">
-	  Esborra cartera actual i crea una nova
+  <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outilne-dark" title="reset wallet"
+    onclick="resetWallet()">
+    Esborra cartera actual i crea una nova
   </div>
 
 
 
-<!-- <script type="text/javascript" src="lib/instascan-browserified.js"></script> -->
-<script type="text/javascript" src="lib/instascan.min.js"></script>
-<script type="text/javascript" src="lib/qrcode.min.js"></script>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/toastr/build/toastr.min.js"></script>
+  <!-- <script type="text/javascript" src="lib/instascan-browserified.js"></script> -->
+  <script type="text/javascript" src="lib/instascan.min.js"></script>
+  <script type="text/javascript" src="lib/qrcode.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/toastr/build/toastr.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 
-<script>
-let theme = "dark-theme";
-function switchThemeClick() {
-  console.log(document.getElementById("themeSwitcher").checked);
-  if (document.getElementById("themeSwitcher").checked === true) {
-    theme = "dark-theme";
-  } else {
-    theme = "light";
-  }
-  console.log(theme);
-  document.body.className = theme;
-}
-  toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  };
-</script>
+  <script>
+    let theme = "dark-theme";
+    function switchThemeClick() {
+      console.log(document.getElementById("themeSwitcher").checked);
+      if (document.getElementById("themeSwitcher").checked === true) {
+        theme = "dark-theme";
+      } else {
+        theme = "light";
+      }
+      console.log(theme);
+      document.body.className = theme;
+    }
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-bottom-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+  </script>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
-<script src="lib/ethereumjs-util-browserified.js"></script>
-<script src="lib/ethereumjs-wallet-browserified.js"></script>
-<script src="lib/bip39-browserified.js"></script>
-<script src="lib/hdkey-browserified.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/qr-utils.js"></script>
-<script src="js/wallet.js"></script>
-<script src="js/history.js"></script>
-<script src="js/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
+  <script src="lib/ethereumjs-util-browserified.js"></script>
+  <script src="lib/ethereumjs-wallet-browserified.js"></script>
+  <script src="lib/bip39-browserified.js"></script>
+  <script src="lib/hdkey-browserified.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/qr-utils.js"></script>
+  <script src="js/wallet.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 
