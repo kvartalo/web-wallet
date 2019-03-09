@@ -4,7 +4,7 @@ const sha3 = b => web3.utils.soliditySha3(b)
 const uint256 = n => "0x"+n.toString(16).padStart(64,'0')
 const uint8 = n => "0x"+n.toString(16)
 
-const RELAYURL = 'http://127.0.0.1:3000';
+const RELAYURL = 'https://rkv.tukutu.xyz';
 const TOKENADDR = '0x224FA23ff195C3Acb4A5ea41D2a5295ebe87A0fe';
 
 let myAddr = "";
@@ -136,16 +136,29 @@ $("#amount").on("change paste keyup", function() {
   onSendDataChanged();
 });
 
-function sendTabActivated() {
+function onSendTabActivated() {
 	$('#amountlabel').val("Quantitat ("+myBalance+"KVT disponibles)")
 	document.getElementById("amount").value = "";
 	document.getElementById("toAddr").value = "";
 	document.getElementById('toAddr').className = 'form-control invisible';
 	document.getElementById('toAddr').className = 'form-control invisible';
 	document.getElementById('qrscannerBox').className = 'visible';
-	
-	scanQR();
+	startScanQR();
 }
+
+function onHistoryTabActivated() {
+	loadHistory()
+	stopScanQR();
+}
+
+function onRecieveTabActivated() {
+	stopScanQR();
+}
+
+function onConfigTabActivated() {
+	stopScanQR();
+}
+
 
 onSendDataChanged();
 loadHistory();

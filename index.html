@@ -10,14 +10,12 @@
   <link rel="stylesheet" href="css/switch-button.css">
   <link rel="stylesheet" href="css/dark-theme.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
 
   <!-- toastr -->
   <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
 
   <!-- to delete and use another in the future -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body class="dark-theme">
@@ -62,26 +60,26 @@
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab"
-                aria-controls="history" aria-selected="false" onclick="loadHistory()" title="Refresh History">
-                KVARTALO
+                aria-controls="history" aria-selected="false" onclick="onHistoryTabActivated()" title="Refresh History">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send"
-                aria-selected="false" onclick="sendTabActivated()">
-                Enviar
+                aria-selected="false" onclick="onSendTabActivated()">
+                <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " id="receive-tab" data-toggle="tab" href="#receive" role="tab" aria-controls="receive"
-                aria-selected="true" onclick="getBalance()">
-                Rebre
+                aria-selected="true" onclick="onRecieveTabActivated()">
+                <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="receive-tab" data-toggle="tab" href="#config" role="tab" aria-controls="receive"
+                <a class="nav-link " onclick="onConfigTabActivated()" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="receive"
                   aria-selected="true">
-                  Configuracio
+                  <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
                 </a>
               </li>
             </ul>
@@ -102,13 +100,13 @@
               </div>
               <!-- send -->
               <div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
-                <h5 class="card-title">Nova transferència</h5>
+                <h5 class="card-title">Enviar nova transferència</h5>
                 <p class="card-text">
                   <div class="form-group">
-                    <label for="amount">Destinatari</label>
+                    <label for="amount">Escanejar QR destinatari</label>
                     <div id="qrscannerBox" class="card invisible" style="text-align: center;">
                         <video id="preview" style="max-height:200px;"></video>
-                      <div onclick="cancelScanQR()" class="btn btn-primary">
+                      <div onclick="cancelScanQR()" class="btn btn-outline-warning">
                         Entrar la direcció manualment
                       </div>
                     </div>
@@ -128,8 +126,8 @@
               </div>
               <!-- recieve -->
               <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
+                <h5 class="card-title">Rebre transferència</h5>
                 <p class="card-text">
-                  <div>
                     <div id="qrcode"></div>
                     <div id="spinnerBalance" class="spinner-border" role="status">
                       <span class="sr-only">Carregant...</span>
@@ -137,11 +135,13 @@
                     Adreça:
                     <input id="myAddrBox" onclick="selectAndCopy(this)" readonly="readonly" type="text"
                       placeholder="my address" class="form-control">
-                  </div>
                 </p>
               </div>
               <!-- recieve -->
               <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="receive-tab">
+                <h5 class="card-title">Configuració</h5>
+                <p class="card-text">
+                </p>
               </div>
             </div>
           </div>

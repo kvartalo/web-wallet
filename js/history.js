@@ -7,6 +7,9 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
 	if (from.length == 42) {
 		from = from.slice(2,8)+"…"+from.slice(36)
 	}
+	if (to.length == 42) {
+		to = to.slice(2,8)+"…"+to.slice(36)
+	}
 
 
   let html = '';

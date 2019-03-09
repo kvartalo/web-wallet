@@ -1,13 +1,23 @@
 let camInitialized = false;
+let scanner;
+let camera;
 
-function scanQR() {
+function stopScanQR() {
+  if (camInitialized) {
+    scanner.stop(camera);
+    return;
+  }
+}
+
+function startScanQR() {
   document.getElementById('qrscannerBox').className = 'card';
   if (camInitialized) {
-  	return;
+    scanner.start(camera);
+    return;
   }
 
   // https://github.com/schmich/instascan
-  let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
+  scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
   scanner.addListener('scan', function (content) {
     console.log('scanned!');
     console.log(content);
@@ -21,8 +31,9 @@ function scanQR() {
   });
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
-      scanner.start(cameras[0]);
-      camInitialized=true;
+      camera = cameras[0];
+      scanner.start(camera);
+      camInitialized = true;
     } else {
       console.error('No es pot localitzar cap càmara');
     }
