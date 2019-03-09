@@ -135,8 +135,7 @@ function onSendDataChanged() {
 		&& toAmount > 0
 		&& toAmount <= myBalance
 	);
-
-	$("#sendbutton").prop('disabled',!enabled)
+	$("#sendButton").prop('disabled',!enabled)
 }
 
 $("#toAddr").on("change paste keyup", function() {
