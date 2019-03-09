@@ -35,7 +35,14 @@
         <div class="card">
 	  <div class="card-body">
 	    <h3>Regenerar cartera desde clau mestre</h3>
-	    <p>Escriu la clau mestre aqui</p>
+	    <p>Recupera des d'un fitxer</p>
+		<div class="upload-btn-wrapper float-right">
+			<div class="btn color_primary">Carrega el fitxer de backup</div>
+			<input id="backup-upload" type="file" accept="text/backup" name="backupFile" oninput="uploadBackup()"/>
+		</div>
+		<br><br>
+		<hr>
+	    <p>Alternativament, recupera a partir de la 'seed'. Escriu la clau mestre aquí</p>
 	    <input id="seed"
 	      type="text" placeholder="my seed"
 	      class="form-control">
@@ -43,7 +50,7 @@
 	      <a href="/" class="btn btn-outline-danger btn-sm">
 		Cancel·lar
 	      </a>
-	      <div onclick="importSeed()" class="btn btn-outline-info btn-sm float-right">
+	      <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
 		Regenerar
 	      </div>
 	  </div>

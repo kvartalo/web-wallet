@@ -11,6 +11,16 @@ a:hover {
 	text-decoration: none!important;
 }
 
+hr {
+	height: 2px!important;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00cee6+0,5ae1cd+98 */
+	background: #00cee6; /* Old browsers */
+	background: -moz-linear-gradient(left, #00cee6 0%, #5ae1cd 98%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #00cee6 0%,#5ae1cd 98%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #00cee6 0%,#5ae1cd 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cee6', endColorstr='#5ae1cd',GradientType=1 ); /* IE6-9 */
+}
 .color_primary {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00cee6+0,5ae1cd+98 */
 background: #00cee6; /* Old browsers */
@@ -36,4 +46,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cee6', end
 
 #qrcode > img {
 	border: 8px solid #ffffff;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
