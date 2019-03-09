@@ -14,7 +14,10 @@ function scanQR() {
     toastr.success(content + " llegit");
     $('#myTab a[href="#send"]').tab('show');
     document.getElementById("toAddr").value = content;
+    document.getElementById('toAddr').className = 'form-control';
     document.getElementById('qrscannerBox').className = 'card invisible';
+    beep();
+    $("#amount").focus()
   });
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
@@ -30,5 +33,6 @@ function scanQR() {
 
 function cancelScanQR() {
   document.getElementById('qrscannerBox').className = 'card invisible';
+  document.getElementById('toAddr').className = 'form-control';
 }
 

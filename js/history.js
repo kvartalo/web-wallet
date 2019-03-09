@@ -4,19 +4,25 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
 	} else if (to==ownAddr) {
 		to = "Jo";
 	}
+	if (from.length == 42) {
+		from = from.slice(2,8)+"…"+from.slice(36)
+	}
+
+
   let html = '';
   html += `
   <li class="list-group-item">
     <a href="#">`
-    html += from+`</a> -->`
+    html += from+`</a> → `
     html += `<a href="#">`
     html += to+`</a>
 	<br>
       <small>`+unixtimeToDate(date)+`</small>
     <div class="float-right">
       <span class="badge color_primary">
-      `;
-	if (to=="Me") {
+			`;
+			
+	if (to=="Jo") {
 	      html += '+' + value;
 	} else {
 	      html += '-' + value;
@@ -98,5 +104,6 @@ function generateHistoryChart(ownAddr, transfers) {
 
 function loadHistory() {
 	getHistory(myAddr);
+	getBalance();
 }
 

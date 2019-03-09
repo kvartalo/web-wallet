@@ -114,8 +114,42 @@ function transact() {
 	  })
 }
 
-getBalance();
+function onSendDataChanged() {
 
+	const toAddr = $("#toAddr").val()
+	const toAmount = Number($("#amount").val())
+
+	const enabled = (
+		toAddr.length > 0
+		&& toAmount > 0
+		&& toAmount <= myBalance
+	);
+
+	$("#sendbutton").prop('disabled',!enabled)
+}
+
+$("#toAddr").on("change paste keyup", function() {
+  onSendDataChanged();
+});
+
+$("#amount").on("change paste keyup", function() {
+  onSendDataChanged();
+});
+
+function sendTabActivated() {
+	$('#amountlabel').val("Quantitat ("+myBalance+"KVT disponibles)")
+	document.getElementById("amount").value = "";
+	document.getElementById("toAddr").value = "";
+	document.getElementById('toAddr').className = 'form-control invisible';
+	document.getElementById('toAddr').className = 'form-control invisible';
+	document.getElementById('qrscannerBox').className = 'visible';
+	
+	scanQR();
+}
+
+onSendDataChanged();
+loadHistory();
+getBalance();
 
 /*
 	todo
