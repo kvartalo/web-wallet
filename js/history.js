@@ -5,10 +5,10 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
 		to = "Jo";
 	}
 	if (from.length == 42) {
-		from = from.slice(2,8)+"…"+from.slice(36)
+		from = from.slice(2,9)
 	}
 	if (to.length == 42) {
-		to = to.slice(2,8)+"…"+to.slice(36)
+		to = to.slice(2,9)
 	}
 
 
@@ -103,10 +103,5 @@ function generateHistoryChart(ownAddr, transfers) {
 	    data: data,
 	    options: options
 	});
-}
-
-function loadHistory() {
-	getHistory(myAddr);
-	getBalance();
 }
 

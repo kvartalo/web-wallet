@@ -45,14 +45,16 @@ function getBalance() {
 	  .then(function (res) {
 			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 						
-			if (initialized && myBalance != Number(res.data.balance)) {
-				beep();
-				loadHistory();
-			} else {
-				initialized = true;
+			if (!initialized || myBalance != Number(res.data.balance)) {
+				if (initialized) {
+					beep();
+				} else {
+					initialized = true;					
+				}
+				myBalance = Number(res.data.balance);
+				onBalanceChanged()
 			}
 
-	    myBalance = Number(res.data.balance);
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
 	    document.getElementById('myBalanceBox').innerHTML=myBalance;
@@ -147,8 +149,12 @@ $("#amount").on("change paste keyup", function() {
   onSendDataChanged();
 });
 
+function onBalanceChanged() {
+	$('#amountlabel').text("Quantitat ("+myBalance+"KVT disponibles)")
+	getHistory(myAddr);
+}
+
 function onSendTabActivated() {
-	$('#amountlabel').val("Quantitat ("+myBalance+"KVT disponibles)")
 	document.getElementById("amount").value = "";
 	document.getElementById("toAddr").value = "";
 	document.getElementById('toAddr').className = 'form-control invisible';
@@ -158,7 +164,7 @@ function onSendTabActivated() {
 }
 
 function onHistoryTabActivated() {
-	loadHistory()
+	getBalance();
 	stopScanQR();
 }
 
@@ -179,7 +185,6 @@ function refreshBalance() {
 
 
 onSendDataChanged();
-loadHistory();
 refreshBalance();
 
 /*
