@@ -49,6 +49,7 @@ function getBalance() {
 			if (!initialized || myBalance != Number(res.data.balance)) {
 				if (initialized) {
 					beep();
+					getHistory(myAddr);
 				} else {
 					initialized = true;					
 				}
