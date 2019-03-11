@@ -44,7 +44,7 @@ function getBalance() {
 	// show current myAddr balance
 	axios.get(RELAYURL + '/balance/' + myAddr)
 	  .then(function (res) {
-			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100);
 						
 			if (!initialized || myBalance != Number(res.data.balance)) {
 				if (initialized) {
@@ -58,7 +58,7 @@ function getBalance() {
 
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
-	    document.getElementById('myBalanceBox').innerHTML=myBalance;
+	    document.getElementById('myBalanceBox').innerHTML=formatMoney(myBalance/100);
 	  })
 	  .catch(function (error) {
 	    console.log(error);
@@ -77,7 +77,7 @@ function transact() {
 		toastr.error("adreça invàlida");
 		return;
 	}
-	let amount = Number(document.getElementById("amount").value);
+	let amount = Number(100*document.getElementById("amount").value);
 	if(amount>myBalance) {
 		toastr.error("no hi ha prou saldo");
 		return;
@@ -129,13 +129,16 @@ function transact() {
 function onSendDataChanged() {
 
 	const toAddr = $("#toAddr").val()
-	const toAmount = Number($("#amount").val())
+	const toAmountStr = $("#amount").val()
+	const toAmount = Number(toAmountStr)
 
 	const enabled = (
 		toAddr.length > 0
 		&& toAmount > 0
-		&& toAmount <= myBalance
+		&& toAmount <= myBalance/100
+		&& /^[0-9]+((\.)[0-9]{0,2}){0,1}$/.test(toAmountStr)
 	);
+
 	$("#sendButton").prop('disabled',!enabled)
 }
 
@@ -148,7 +151,7 @@ $("#amount").on("change paste keyup", function() {
 });
 
 function onBalanceChanged() {
-	$('#amountlabel').text("Quantitat ("+myBalance+"KVT disponibles)")
+	$('#amountlabel').text("Quantitat ("+formatMoney(myBalance/100)+"KVT disponibles)")
 	getHistory(myAddr);
 }
 

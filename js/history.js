@@ -11,7 +11,6 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
 		to = to.slice(2,9)
 	}
 
-
   let html = '';
   html += `
   <li class="list-group-item">
@@ -21,16 +20,17 @@ function generateHistoryElement(ownAddr, from, to, value, date) {
     html += to+`</a>
 	<br>
       <small>`+unixtimeToDate(date)+`</small>
-    <div class="float-right">
-      <span class="badge color_primary">
-			`;
+		<div class="float-right">
+		`;
 
-	if (to=="Jo") {
-	      html += '+' + value;
+	if (from==="Jo") {
+		html += `<span class="badge color_output">`
+		value = -value;
 	} else {
-	      html += '-' + value;
+		html += `<span class="badge color_input">`
 	}
-      html += ` KVT</span>
+
+  html += formatMoney(value/100)+` KVT</span>
     </div>
   </li>
   `;
@@ -43,7 +43,7 @@ function getHistory(addr) {
 	  .then(function (res) {
 	    console.log(res.data);
 	    printHistory(addr, res.data.transfers);
-	    generateHistoryChart(addr, res.data.transfers);
+	    // generateHistoryChart(addr, res.data.transfers);
 	  })
 	  .catch(function (error) {
 	    console.log(error);
