@@ -4,13 +4,7 @@ const sha3 = b => web3.utils.soliditySha3(b)
 const uint256 = n => "0x"+n.toString(16).padStart(64,'0')
 const uint8 = n => "0x"+n.toString(16)
 
-const RELAYURL = 'https://rkv.tukutu.xyz';
-const TOKENADDR = '0x224FA23ff195C3Acb4A5ea41D2a5295ebe87A0fe';
 
-let myAddr = "";
-let myBalance = 0;
-let myNonce = 0;
-let initialized = false;
 
 console.log("myAddr", localStorage.getItem("myAddr"));
 console.log("mySeed", localStorage.getItem("mySeed"));
@@ -39,33 +33,7 @@ $("#qrcode > img").css({"margin":"auto"});
 document.getElementById('myAddrBox').value=myAddr;
 document.getElementById('myAddrLabel').innerHTML=myAddr.slice(2,9);
 
-function getBalance() {
-	console.log("recuperant saldo");
-	// show current myAddr balance
-	axios.get(RELAYURL + '/balance/' + myAddr)
-	  .then(function (res) {
-			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100);
-						
-			if (!initialized || myBalance != Number(res.data.balance)) {
-				if (initialized) {
-					beep();
-					getHistory(myAddr);
-				} else {
-					initialized = true;					
-				}
-				myBalance = Number(res.data.balance);
-				onBalanceChanged()
-			}
 
-	    console.log(res.data);
-	    console.log("balance " + myBalance);
-	    document.getElementById('myBalanceBox').innerHTML=formatMoney(myBalance/100);
-	  })
-	  .catch(function (error) {
-	    console.log(error);
-	    toastr.error(error);
-	  });
-}
 
 
 function transact() {
@@ -151,10 +119,6 @@ $("#amount").on("change paste keyup", function() {
   onSendDataChanged();
 });
 
-function onBalanceChanged() {
-	$('#amountlabel').text("Quantitat ("+formatMoney(myBalance/100)+"KVT disponibles)")
-	getHistory(myAddr);
-}
 
 function onSendTabActivated() {
 	document.getElementById("amount").value = "";

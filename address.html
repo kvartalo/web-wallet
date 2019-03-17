@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cartera kvartalo</title>
+  <link rel="icon" type="image/png" href="img/web-wallet-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/switch-button.css">
+  <link rel="stylesheet" href="css/dark-theme.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
+
+  <!-- toastr -->
+  <link href="node_modules/toastr/build/toastr.css" rel="stylesheet" />
+
+  <!-- to delete and use another in the future -->
+</head>
+
+<body class="dark-theme">
+  <br><br><br>
+  <div class="card mainBox">
+
+    <div id="addrBox" class="card-body invisible">
+      <h3>Visualitza una adreça</h3>
+      <input id="addrInput" type="text" class="form-control" placeholder="Adreça a visualitzar">
+      <br>
+      <a href="/" class="btn btn-outline-danger">Enrera</a>
+      <div onclick="goToAddress()" class="btn color_primary float-right">Visualitza</div>
+    </div>
+    <div id="mainBox" class="card-body">
+      <h2>visualitza adreça</h2>
+      <code id="addressPrint" style="font-size:150%;"></code>
+      <hr>
+      <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
+        <div class="balanceBox">
+          Saldo actual
+          <h3>
+            <span id="myBalanceBox">0</span> KVT
+          </h3>
+          <span id="myAddrLabel"></span>
+        </div>
+
+        <br>
+        <h5 class="card-title">Històric</h5>
+        <hr>
+        <ul class="list-group" id="historyBox">
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="fixed-bottom" style="padding: 30px;text-align:center;">
+    <a href="https://kvartalo.xyz" target="_blank">
+      kvartalo 2019
+    </a>
+  </div>
+
+
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/toastr/build/toastr.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  <script>
+    let theme = localStorage.getItem("theme");
+    if (theme === "light") {
+      document.getElementById("themeSwitcher").checked = false;
+      document.body.className = theme;
+    }
+
+    function switchThemeClick() {
+      theme = localStorage.getItem("theme");
+      if (theme === "light") {
+        document.getElementById("themeSwitcher").checked = true;
+        theme = "dark-theme";
+        localStorage.setItem("theme", theme);
+      } else {
+        document.getElementById("themeSwitcher").checked = false;
+        theme = "light";
+        localStorage.setItem("theme", theme);
+      }
+      document.body.className = theme;
+    }
+
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-bottom-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+  </script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+  <script src="js/constants.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/history.js"></script>
+
+  <script>
+    var url = new URL(window.location.href);
+    var addr = url.searchParams.get("addr");
+    console.log("addr", addr);
+    myAddr = addr;
+    if ((addr==undefined)||(addr=="")) {
+      document.getElementById("addrBox").className = "card-body";
+      document.getElementById("mainBox").className = "card-body invisible";
+    }
+    function goToAddress() {
+      myAddr = document.getElementById("addrInput").value;
+      window.location.href = "/address.html?addr=" + myAddr;
+    }
+
+    document.getElementById("addressPrint").innerHTML = myAddr;
+    function refreshBalance() {
+    	getBalance();
+    	setTimeout(function(){
+    		refreshBalance();
+    	}, 5000);
+    }
+    refreshBalance();
+  </script>
+
+</body>
+
+</html>

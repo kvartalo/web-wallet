@@ -116,3 +116,38 @@ function generateHistoryChart(ownAddr, transfers) {
 	});
 }
 
+
+function getBalance() {
+	console.log("recuperant saldo");
+	// show current myAddr balance
+	axios.get(RELAYURL + '/balance/' + myAddr)
+	  .then(function (res) {
+			$("#myBalanceBox").fadeIn(100).fadeOut(100).fadeIn(100);
+
+			if (!initialized || myBalance != Number(res.data.balance)) {
+				if (initialized) {
+					beep();
+					getHistory(myAddr);
+					 // as the relay needs some time to get the history data:
+					setTimeout(getHistory(myAddr), 10000);
+				} else {
+					initialized = true;
+				}
+				myBalance = Number(res.data.balance);
+				onBalanceChanged()
+			}
+
+	    console.log(res.data);
+	    console.log("balance " + myBalance);
+	    document.getElementById('myBalanceBox').innerHTML=formatMoney(myBalance/100);
+	  })
+	  .catch(function (error) {
+	    console.log(error);
+	    toastr.error(error);
+	  });
+}
+
+function onBalanceChanged() {
+	$('#amountlabel').text("Quantitat ("+formatMoney(myBalance/100)+"KVT disponibles)")
+	getHistory(myAddr);
+}
