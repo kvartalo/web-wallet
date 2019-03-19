@@ -1,6 +1,6 @@
 
 const RELAYURL = 'https://rkv.tukutu.xyz';
-const TOKENADDR = '0x224FA23ff195C3Acb4A5ea41D2a5295ebe87A0fe';
+const TOKENADDR = '0xb5c383A84ca17331aBb782B552fc3503e022F3Ad';
 
 
 let myAddr = "";

@@ -46,7 +46,8 @@ function transact() {
 		toastr.error("adreça invàlida");
 		return;
 	}
-	let amount = Number(100*document.getElementById("amount").value);
+	let amount = Number(100*Number(document.getElementById("amount").value));
+	amount = Number(amount.toFixed(0));
 	if(amount>myBalance) {
 		toastr.error("no hi ha prou saldo");
 		return;
