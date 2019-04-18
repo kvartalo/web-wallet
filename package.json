@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.2.1",
-    "instascan": "^1.0.0",
+    "axios": "0.18.0",
+    "bootstrap": "4.2.1",
+    "instascan": "1.0.0",
+    "popper.js": "^1.14.7",
     "toastr": "^2.1.4"
   }
 }
