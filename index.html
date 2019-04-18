@@ -6,8 +6,12 @@
   <title>Cartera kvartalo</title>
   <link rel="icon" type="image/png" href="img/web-wallet-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <link rel="manifest" href="manifest.json" />
+
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/switch-button.css">
+  <link rel="stylesheet" href="css/utils.css">
   <link rel="stylesheet" href="css/dark-theme.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
@@ -67,6 +71,15 @@
                   <span id="myBalanceBox">0</span> KVT
                 </span>
                 <h5 class="card-title">Saldo actual</h5> -->
+
+
+	<!-- Msg -->
+	  <div style="border:1px #aa80ff solid; border-radius: 5px; padding: 20px; color: #aa80ff;">
+		  <b>Alerta</b>: La primera iteració ha finalitzat, actualment les monedes ja no tenen valor, són únicament de test, sense cap valor real.
+	  </div><br>
+
+
+
           <h5 class="card-title">Històric</h5>
           <hr>
           <!--<canvas id="historyChart" width="400" height="200"></canvas> -->
@@ -196,7 +209,7 @@
     </div>
   </div>
 
-  <div class="fixed-bottom" style="padding: 30px;text-align:center;">
+  <div class="fixed-bottom" style="padding: 30px;text-align:center; z-index:-1000;">
 	  <a href="https://kvartalo.xyz" target="_blank">
 		  kvartalo 2019
 	  </a>
@@ -212,9 +225,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 
   <script>
     let theme = localStorage.getItem("theme");
@@ -256,8 +268,8 @@
     };
   </script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+  <script src="node_modules/axios/dist/axios.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script> -->
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>
   <script src="lib/ethereumjs-util-browserified.js"></script>

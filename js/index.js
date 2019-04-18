@@ -21,6 +21,7 @@ if (localStorage.getItem("myAddr")===null) {
 	localStorage.setItem("mySeed", obj.mnemonic);
 	console.log("seed", obj.mnemonic);
 	toastr.success("Nova cartera creada! Adreça: " + obj.address);
+	downloadBackup();
 }
 myAddr = localStorage.getItem("myAddr");
 console.log("myAddr", myAddr);
