@@ -140,10 +140,12 @@ function getBalance() {
 	    console.log(res.data);
 	    console.log("balance " + myBalance);
 	    document.getElementById('myBalanceBox').innerHTML=formatMoney(myBalance/100);
+	    document.getElementById('spinnerBalance').className = 'spinner-border invisible';
 	  })
 	  .catch(function (error) {
 	    console.log(error);
 	    toastr.error(error);
+	    document.getElementById('spinnerBalance').className = 'spinner-border invisible';
 	  });
 }
 
