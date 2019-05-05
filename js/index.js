@@ -152,8 +152,30 @@ function refreshBalance() {
 }
 
 
-onSendDataChanged();
-refreshBalance();
+if (localStorage.getItem("poll_1")) {
+	$("#wallet-maincard").show();
+	onSendDataChanged();
+	refreshBalance();	
+} else {
+	$("#sendpoll").click( function() {
+		const oks =
+			($("#poll_q1").val() == 3) + 
+			($("#poll_q2").val() == 2) +
+			($("#poll_q3").val() == 1) ;
+
+		if (oks == 3) {
+			localStorage.setItem("poll_1","done");
+			$("#poll-maincard").hide();
+			$("#wallet-maincard").show();
+			onSendDataChanged();
+			refreshBalance();	
+		} else {
+			alert("Torna-ho a intentar!");
+		}
+	});	
+
+	$("#poll-maincard").show();
+}
 
 /*
 	todo

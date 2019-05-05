@@ -24,8 +24,34 @@
 </head>
 
 <body class="dark-theme">
+  <div id="poll-maincard" class="card mainBox"  style="display: none">
+    <h5>Saps com funciona?</h5>
+    <br><br>Si, cal passar un petit examen avans de fer servir el wallet! 😜
+    <i>Quin dia s'acaba aquesta prova?</i>
+    <select id="poll_q1" style="margin-bottom:20px;">
+        <option value="1" default>està pendent de confirmar</option>
+        <option value="2">a la següent iteració</option>
+        <option value="3">el 3 de juny</option>
+        <option value="4">el 4 de juny</option>
+    </select>
+    <i>Que pasa amb les monedes quan s'acaba la prova?</i>
+    <select id="poll_q2" style="margin-bottom:20px;">
+        <option value="1">sempre és poden canviar per euros</option>
+        <option value="2">les monedes no gastades es perden per sempre</option>
+        <option value="3" default>puc comprar mentres tingui monedes</option>
+        <option value="4">s'acumulen per la següent iteració</option>
+    </select>
+    <i>Qui pot canviar de monedes a euro?</i>
+    <select id="poll_q3" style="margin-bottom:20px;">  
+      <option value="1">qui aparegui al apartat proveïdors del wallet</option>
+      <option value="2" default>qui sigui proveidor</option>
+      <option value="3">enviant un correu a la lleieltat</option>
+      <option value="4">qualsevol persona amb prou antel.lacio</option>
+    </select>
+    <button id="sendpoll" class="btn color_primary" style="margin-top:20px;" type="button">Enviar</button>
+  </div>
 
-  <div class="card mainBox">
+  <div id="wallet-maincard" class="card mainBox" style="display: none">
     <!-- menu -->
     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
       <li class="nav-item">
@@ -133,7 +159,22 @@
         </div>
         <!-- config -->
         <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
-          <h5>Configuració general</h5>
+
+          <h5><i class="fa fa-info" aria-hidden="true"></i> Informació</h5>
+          <hr>
+          <div>
+            <b>Que és?</b> Kvartalo es un projecte de codi lliure per a la creació de monedes socials sobre blockchain.<br>
+            Pots obtiendre més informació <a href="https://kvartalo.xyz" target="_blank">aqui</a>.<br>
+
+            <br><b>Quins comerços accepten la moneda?</b> La llista de comerços que actualment l'accepten son:<br>
+
+            - <a href="https://www.lleialtat.cat/tag/capirota/" target="_blank">Café cooperatiu La Capirota</a>
+
+            <br><br><b>Com ho puc fer per ser un comerç que acepti la moneda?</b> Envia un email a rita@tec.lleialtat.cat o bé a chris@tec.lleialtat.cat
+
+          </div>
+          <br>
+          <h5><i class="fa fa-sliders" aria-hidden="true"></i> Configuració general</h5>
           <hr>
           Tema visual:
           <div class="onoffswitch" style="display:inline-block;margin: 10px;" title="change theme">
@@ -142,7 +183,7 @@
             <label class="onoffswitch-label" for="themeSwitcher"></label>
           </div>
           <br><br>
-          <h5>Còpia de seguretat</h5>
+          <h5><i class="fa fa-life-ring" aria-hidden="true"></i> Còpia de seguretat</h5>
           <hr>
           <div class="accordion" id="accordionExample">
             <div>
@@ -196,28 +237,26 @@
                   <div onclick="importInputSeed()" class="btn btn-outline-info btn-sm float-right">
                     Regenerar
                   </div>
-
+                  <br>
+                  <h3>Esborrat</h3>
+                  <hr>
+                  <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outline-danger"
+                    title="reset wallet" onclick="resetWallet()">
+                    Esborra cartera actual i crea una nova cartera
+                  </div>        
+          </div>
+                  </div>        
                 </div>
               </div>
             </div>
           </div>
-
-          <h5>Esborrat</h5>
-          <hr>
-          <div style="margin-bottom:0;margin-right:10px;" class="float-right btn btn-outline-danger"
-            title="reset wallet" onclick="resetWallet()">
-            Esborra cartera actual i crea una nova cartera
-          </div>
+          <br><br>
+        
         </div>
       </div>
     </div>
   </div>
 
-  <div style="padding: 30px;text-align:center; z-index:-1000;">
-	  <a href="https://kvartalo.xyz" target="_blank">
-		  kvartalo 2019
-	  </a>
-  </div>
 
 
   <!-- <script type="text/javascript" src="lib/instascan-browserified.js"></script> -->
