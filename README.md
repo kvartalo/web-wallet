@@ -17,6 +17,8 @@ npm i -g live-server live-server-https
 live-server --https=`npm root -g`/live-server-https
 ```
 
+For deployments & real usage, better use nginx + letsencrypt or something similar.
+
 ### lib generation
 This is already done.
 
